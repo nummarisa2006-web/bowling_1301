@@ -4,42 +4,46 @@ using UnityEngine.InputSystem;
 public class Bowling : MonoBehaviour
 {
     [SerializeField]
-    private Rigidbidt rd;
+    private Rigidbody rb;
 
     [SerializeField]
     private int forcePower;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<RigidBody>();
+        rb = GetComponent<Rigidbody>();
     }
-     
-    // Update is called once per frame
+
     void Update()
     {
-        if (Keyboard.current.spaceKry.wasPressedThidFrame)
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
             ShootBall();
+        }
 
-        if (keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
+        if (Keyboard.current.rightArrowKey.isPressed || Keyboard.current.dKey.isPressed)
+        {
             MoveRight();
+        }
 
-        if (keyboard.current.leftArrowKey.isPressed || Keyboard.current.dKey.isPressed)
+        if (Keyboard.current.leftArrowKey.isPressed || Keyboard.current.aKey.isPressed)
+        {
             MoveLeft();
+        }
     }
 
-    private void ShootBall()
+    public void ShootBall()
     {
         rb.AddForce(Vector3.forward * forcePower, ForceMode.Impulse);
     }
 
     private void MoveRight()
     {
-        transform.postition += new Vector3(0.5f, 0f, 0f) * Time.deltaTime;
+        transform.position += new Vector3(0.5f, 0f, 0f) * Time.deltaTime;
     }
 
     private void MoveLeft()
     {
-        transform.postition += new Vector3(0.5f, 0f, 0f) * Time.deltaTime;
+        transform.position += new Vector3(-0.5f, 0f, 0f) * Time.deltaTime;
     }
 }
